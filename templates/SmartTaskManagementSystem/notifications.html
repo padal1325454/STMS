@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notifications | STMS</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <header>
+        <h1>Task Notifications</h1>
+        <nav>
+            <a href="{% url 'SmartTaskManagementSystem:dashboard' %}">Dashboard</a>
+            <a href="{% url 'SmartTaskManagementSystem:create_task' %}">Create Task</a>
+            <a href="{% url 'SmartTaskManagementSystem:notifications' %}">Notifications</a>
+            <a href="{% url 'SmartTaskManagementSystem:github' %}">GitHub Issues</a>
+            <a href="{% url 'SmartTaskManagementSystem:reports' %}">Reports</a>
+            <a href="{% url 'SmartTaskManagementSystem:logout' %}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Recent Task Updates</h2>
+        <ul id="notification-list">
+            {% for notification in notifications %}
+                <li>{{ notification.message }} - {{ notification.timestamp }}</li>
+            {% empty %}
+                <li>No notifications available.</li>
+            {% endfor %}
+        </ul>
+    </main><br><br>
+
+    <footer>
+        <p>&copy; 2025 Smart Task Management System | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

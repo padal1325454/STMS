@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Management</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <header>
+        <h1>Task Management</h1>
+        <nav>
+            <a href="{% url 'SmartTaskManagementSystem:dashboard' %}">Dashboard</a>
+            <a href="{% url 'SmartTaskManagementSystem:create_task' %}">Create Task</a>
+            <a href="{% url 'SmartTaskManagementSystem:notifications' %}">Notifications</a>
+            <a href="{% url 'SmartTaskManagementSystem:github' %}">GitHub Issues</a>
+            <a href="{% url 'SmartTaskManagementSystem:reports' %}">Reports</a>
+            <a href="{% url 'SmartTaskManagementSystem:logout' %}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Task List</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <strong>{{ task.title }}</strong> - {{ task.status }}
+                    <form action="{% url 'SmartTaskManagementSystem:update_task_status' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <select name="status">
+                            <option value="To Do">To Do</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </main><br><br>
+
+    <footer>
+        <p>&copy; 2025 Smart Task Management System | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

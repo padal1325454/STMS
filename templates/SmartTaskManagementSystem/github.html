@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Issues | STMS</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <header>
+        <h1>GitHub Issue Tracker</h1>
+        <nav>
+            <a href="{% url 'SmartTaskManagementSystem:dashboard' %}">Dashboard</a>
+            <a href="{% url 'SmartTaskManagementSystem:create_task' %}">Create Task</a>
+            <a href="{% url 'SmartTaskManagementSystem:notifications' %}">Notifications</a>
+            <a href="{% url 'SmartTaskManagementSystem:github' %}">GitHub Issues</a>
+            <a href="{% url 'SmartTaskManagementSystem:reports' %}">Reports</a>
+            <a href="{% url 'SmartTaskManagementSystem:logout' %}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Current Issues from GitHub</h2>
+        <ul id="github-issues">
+            {% if issues %}
+                {% for issue in issues %}
+                    <li>
+                        <strong><a href="{{ issue.html_url }}" target="_blank">{{ issue.title }}</a></strong> - {{ issue.state }}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>No issues found currently!</li>
+            {% endif %}
+        </ul>
+    </main><br><br>
+
+    <footer>
+        <p>&copy; 2025 Smart Task Management System | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

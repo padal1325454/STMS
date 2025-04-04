@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | STMS</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <header>
+        <h1>Smart Task Management System</h1>
+    </header>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <main>
+        <h2>Login to Your Account</h2>
+        <form action="{% url 'SmartTaskManagementSystem:login' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'SmartTaskManagementSystem:signup' %}">Sign up here</a></p>
+    </main><br><br>
+
+    <footer>
+        <p>&copy; 2025 Smart Task Management System | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
